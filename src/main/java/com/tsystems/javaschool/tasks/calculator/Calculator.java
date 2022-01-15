@@ -6,18 +6,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Calculator {
-
     // test №17: In my opinion in this situation my answer is correct, because people can write statement "4-(-3)", like this "4--3".
-
-    /**
-     * Evaluate statement represented as string.
-     *
-     * @param statement mathematical statement containing digits, '.' (dot) as decimal mark,
-     *                  parentheses, operations signs '+', '-', '*', '/'<br>
-     *                  Example: <code>(1 + 38) * 4.5 - 1 / 2.</code>
-     * @return string value containing result of evaluation or null if statement is invalid
-     */
-
     public static void main(String[] args) {
         Calculator c = new Calculator();
         System.out.println(c.evaluate("(1+38)*4-5")); // Result: 151
@@ -27,6 +16,15 @@ public class Calculator {
         System.out.println(c.evaluate("1...1")); // Result: null
         System.out.println(c.evaluate("10/(5-5)")); // Result: null
     }
+
+    /**
+     * Evaluate statement represented as string.
+     *
+     * @param statement mathematical statement containing digits, '.' (dot) as decimal mark,
+     *                  parentheses, operations signs '+', '-', '*', '/'<br>
+     *                  Example: <code>(1 + 38) * 4.5 - 1 / 2.</code>
+     * @return string value containing result of evaluation or null if statement is invalid
+     */
 
     public String evaluate(String statement) {
         // TODO: Implement the logic here

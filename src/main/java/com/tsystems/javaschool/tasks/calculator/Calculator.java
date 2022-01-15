@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public class Calculator {
 
+    // test №17: In my opinion in this situation my answer is correct, because people can write statement "4-(-3)", like this "4--3".
+
     /**
      * Evaluate statement represented as string.
      *
@@ -23,6 +25,7 @@ public class Calculator {
         System.out.println(c.evaluate("(1+3.8)*4-5/3")); // Result: 17.53333333333333
         System.out.println(c.evaluate("-12)1//(")); // Result: null
         System.out.println(c.evaluate("1...1")); // Result: null
+        System.out.println(c.evaluate("10/(5-5)")); // Result: null
     }
 
     public String evaluate(String statement) {
@@ -30,15 +33,19 @@ public class Calculator {
         try {
             StringBuilder a = new StringBuilder(minusToTilda(statement));
             String strAnswer = operateBracket(a, a.indexOf("" + '('));
-            if (strAnswer != null) {
-                if (strAnswer.lastIndexOf("0") != strAnswer.length() - 1) {
-                    if (strAnswer.length() - strAnswer.indexOf(".") >= 3) {
-                        return strAnswer.substring(0, strAnswer.indexOf(".") + (strAnswer.length() - strAnswer.indexOf(".")));
-                    } else return strAnswer;
-                } else {
-                    return strAnswer.substring(0, strAnswer.indexOf("."));
-                }
-            } else return null;
+            if (strAnswer.equals("Infinity")) {
+                return null;
+            } else {
+                if (strAnswer != null) {
+                    if (strAnswer.lastIndexOf("0") != strAnswer.length() - 1) {
+                        if (strAnswer.length() - strAnswer.indexOf(".") >= 3) {
+                            return strAnswer.substring(0, strAnswer.indexOf(".") + (strAnswer.length() - strAnswer.indexOf(".")));
+                        } else return strAnswer;
+                    } else {
+                        return strAnswer.substring(0, strAnswer.indexOf("."));
+                    }
+                } else return null;
+            }
         } catch (NullPointerException e) {
             return null;
         }

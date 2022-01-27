@@ -21,21 +21,21 @@ public class Calculator {
                     || statement.contains("//") || statement.contains(",") || statement.length() < 3) {
                 return null;
             }
+
             statement = statement.replaceAll("-", "+-");
             StringBuilder a = new StringBuilder(statement);
             String strAnswer = operateBracket(a, a.indexOf("" + '('));
-            if (strAnswer.equals("Infinity")) {
+
+            if (strAnswer.equals("Infinity") || strAnswer == null) {
                 return null;
+            }
+            if (strAnswer.lastIndexOf("0") != strAnswer.length() - 1) {
+                int temp = strAnswer.length() - strAnswer.indexOf(".");
+                if (temp >= 3) {
+                    return strAnswer.substring(0, strAnswer.indexOf(".") + temp);
+                } else return strAnswer;
             } else {
-                if (strAnswer != null) {
-                    if (strAnswer.lastIndexOf("0") != strAnswer.length() - 1) {
-                        if (strAnswer.length() - strAnswer.indexOf(".") >= 3) {
-                            return strAnswer.substring(0, strAnswer.indexOf(".") + (strAnswer.length() - strAnswer.indexOf(".")));
-                        } else return strAnswer;
-                    } else {
-                        return strAnswer.substring(0, strAnswer.indexOf("."));
-                    }
-                } else return null;
+                return strAnswer.substring(0, strAnswer.indexOf("."));
             }
         } catch (NullPointerException e) {
             return null;
@@ -47,39 +47,38 @@ public class Calculator {
             return (operate(s.toString()));
         } else {
             int k = 1;
-            int openParenthese = 0;
-            int closeParenthese = 0;
+            int openParentheses = 0;
+            int closeParentheses = 0;
             char temp1;
             char temp2;
             for (int j = 0; j < s.length(); j++) {
                 temp1 = s.charAt(j);
                 if (temp1 == ('(')) {
-                    openParenthese++;
+                    openParentheses++;
                 }
                 temp2 = s.charAt(j);
                 if (temp2 == (')')) {
-                    closeParenthese++;
+                    closeParentheses++;
                 }
             }
-            if (openParenthese != closeParenthese) {
+            if (openParentheses != closeParentheses) {
                 return null;
-            } else {
-                if ((startIndex + 1) < s.length()) {
-                    for (int i = startIndex + 1; i < s.length(); i++) {
-                        if (s.charAt(i) == '(')
-                            k++;
-                        else if ((s.charAt(i) == ')')) {
-                            if (k == 1) {
-                                String newBracket = s.substring(startIndex + 1, i);
-                                s.replace(startIndex, i + 1, Objects.requireNonNull(operateBracket(new StringBuilder(newBracket),
-                                        newBracket.indexOf("" + '('))));
-                            }
-                            k--;
-                        }
-                    }
-                    return operate(s.toString());
-                } else return null;
             }
+            if ((startIndex + 1) < s.length()) {
+                for (int i = startIndex + 1; i < s.length(); i++) {
+                    if (s.charAt(i) == '(')
+                        k++;
+                    else if ((s.charAt(i) == ')')) {
+                        if (k == 1) {
+                            String newBracket = s.substring(startIndex + 1, i);
+                            s.replace(startIndex, i + 1, Objects.requireNonNull(operateBracket(new StringBuilder(newBracket),
+                                    newBracket.indexOf("" + '('))));
+                        }
+                        k--;
+                    }
+                }
+                return operate(s.toString());
+            } else return null;
         }
     }
 

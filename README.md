@@ -12,7 +12,7 @@ The exam includes 3 tasks to be done: [Calculator](/tasks/Calculator.md), [Pyram
 ### Result ###
 
 * Author name : Nikita Chermenyov
-* Codeship : [![GitHub Actions](https://github.com/Nikotinsv/Tschool/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/Nikotinsv/Tschool/actions/workflows/github-actions-demo.yml)
+* GitHub Actions : [![GitHub Actions](https://github.com/Nikotinsv/Tschool/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/Nikotinsv/Tschool/actions/workflows/github-actions-demo.yml)
 
 
 ### How to start?  ###
